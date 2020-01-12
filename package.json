@@ -2,6 +2,10 @@
   "name": "helloclinic-ui",
   "version": "1.0.0",
   "private": true,
+  "author": {
+    "name": "Mahesh Patil",
+    "email": "monstermp@gmail.com"
+  },
   "scripts": {
     "precommit": "lint-staged",
     "start": "react-scripts start",

@@ -1,3 +1,4 @@
+//Slice is a combination of action.js and reducer.js
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../../createStore';
 import { Patient } from '../../api/fetch';
@@ -44,6 +45,8 @@ const patientDetailsSlice = createSlice({
     }
   }
 });
+
+//Action Types
 export const {
   getPatientSuccess,
   getPatientFailure
