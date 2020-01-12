@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux-starter-kit';
+import { combineReducers } from '@reduxjs/toolkit';
 import patientReducer from '../client/features/patient/patientSlice';
 
 const rootReducer = combineReducers({
-  app: patientReducer
+  patientDetails: patientReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

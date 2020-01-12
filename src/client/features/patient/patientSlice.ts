@@ -1,44 +1,71 @@
-import { createSlice, PayloadAction } from 'redux-starter-kit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppThunk } from '../../createStore';
+import { Patient } from '../../api/fetch';
 
 interface PatientDetailsState {
-  patientName: String;
+  name: string;
   age: number | null;
-  phoneNumber: String | null;
+  phoneNumber: string | null;
+  email: string | null;
   error: String | null;
 }
 
 const initialState: PatientDetailsState = {
-  patientName: '',
+  name: '',
   age: null,
   phoneNumber: null,
+  email: null,
   error: null
 };
 
-const patientDetails = createSlice({
+const patientDetailsSlice = createSlice({
   name: 'patientDetails',
   initialState,
   reducers: {
     getPatientsData(state) {
-      state.patientName = '';
+      state.name = '';
       state.age = null;
       state.phoneNumber = null;
       state.error = null;
     },
-    getPatientSuccess(state, action: PayloadAction) {
-      // const { patientName, age, phoneNumber } = action.payload
-      state.patientName = 'Mahesh Patil'; //action.payload.patient_name
-      state.age = 32;
-      state.phoneNumber = '+91-9960955960';
+    getPatientSuccess(state, action: PayloadAction<Patient>) {
+      // const { name, age, phoneNumber } = action.payload
+      state.name = action.payload.name;
+      state.age = action.payload.age;
+      state.phoneNumber = action.payload.phoneNumber;
+      state.email = action.payload.email;
       state.error = null;
     },
     getPatientFailure(state, action: PayloadAction<string>) {
-      state.patientName = '';
+      state.name = '';
       state.age = null;
       state.phoneNumber = null;
       state.error = null; //action.payload
     }
   }
 });
-export const { getPatientSuccess, getPatientFailure } = patientDetails.actions;
+export const {
+  getPatientSuccess,
+  getPatientFailure
+} = patientDetailsSlice.actions;
 
-export default patientDetails.reducer;
+export default patientDetailsSlice.reducer;
+
+export const fetchPatientsDetails = (
+  patientName: string
+): AppThunk => async dispatch => {
+  try {
+    // dispatch(getPatientDetailsStart()) // Can be used to set loading = 'true'
+    // const Patient = await getPatient(patientName)
+    const Patient = {
+      name: 'Mahesh Patil',
+      age: 32,
+      dob: 32,
+      phoneNumber: '9960955960',
+      email: 'monstermp@gmail.com'
+    };
+    dispatch(getPatientSuccess(Patient));
+  } catch (err) {
+    dispatch(getPatientFailure(err));
+  }
+};
