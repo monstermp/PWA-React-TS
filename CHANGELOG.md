@@ -17,3 +17,9 @@
 -- Integrated React component with Redux using Reacts Hooks API instead of Connect function.
    useSelector instead of mapStateToProps, useDispatch instead of mapDispatchToProps and useEffect.
 -- Integrated redux-thunk as a middleware for the server side call.  
+
+## Pending Features
+-- Internationalization. 
+-- IDAM Login.
+-- MenuBar, Profile & Notification icon integration on Menu Bar.
+-- Unit test case execution. 

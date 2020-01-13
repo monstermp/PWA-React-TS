@@ -6,13 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import App from './client/components/base/App';
 import { Provider } from 'react-redux';
 import store from '../src/client/createStore';
-// Generate the store
-//const store = configureStore();
 
 // Render the app
 const render = () => {
-  // const App = require('./client/components/base/App').default
-
   ReactDOM.render(
     <Provider store={store}>
       <App />
@@ -29,5 +25,5 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-//serviceWorker.unregister();
+// serviceWorker.unregister();
 serviceWorker.register();

@@ -1,7 +1,7 @@
 //Slice is a combination of action.js and reducer.js
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../../createStore';
-import { Patient } from '../../api/fetch';
+import { Patient, fetchPatient } from '../../api/fetch';
 
 interface PatientDetailsState {
   name: string;
@@ -23,25 +23,19 @@ const patientDetailsSlice = createSlice({
   name: 'patientDetails',
   initialState,
   reducers: {
-    getPatientsData(state) {
-      state.name = '';
-      state.age = null;
-      state.phoneNumber = null;
-      state.error = null;
-    },
     getPatientSuccess(state, action: PayloadAction<Patient>) {
-      // const { name, age, phoneNumber } = action.payload
-      state.name = action.payload.name;
-      state.age = action.payload.age;
-      state.phoneNumber = action.payload.phoneNumber;
-      state.email = action.payload.email;
+      const { name, age, phoneNumber, email } = action.payload;
+      state.name = name;
+      state.age = age;
+      state.phoneNumber = phoneNumber;
+      state.email = email;
       state.error = null;
     },
     getPatientFailure(state, action: PayloadAction<string>) {
       state.name = '';
       state.age = null;
       state.phoneNumber = null;
-      state.error = null; //action.payload
+      state.error = action.payload;
     }
   }
 });
@@ -59,14 +53,7 @@ export const fetchPatientsDetails = (
 ): AppThunk => async dispatch => {
   try {
     // dispatch(getPatientDetailsStart()) // Can be used to set loading = 'true'
-    // const Patient = await getPatient(patientName)
-    const Patient = {
-      name: 'Mahesh Patil',
-      age: 32,
-      dob: 32,
-      phoneNumber: '9960955960',
-      email: 'monstermp@gmail.com'
-    };
+    const Patient = await fetchPatient(patientName);
     dispatch(getPatientSuccess(Patient));
   } catch (err) {
     dispatch(getPatientFailure(err));

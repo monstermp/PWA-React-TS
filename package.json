@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "author": {
-    "name": "Mahesh Patil",
-    "email": "monstermp@gmail.com"
+    "name": "monstermp",
+    "email": "mahesh_patil11@infosys.com"
   },
   "scripts": {
     "precommit": "lint-staged",
