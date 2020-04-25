@@ -2,7 +2,7 @@
 import axios from 'axios';
 // export const TEMP_VAR = 'Added just to make build work';
 
-export interface Patient {
+export interface Person {
   // This can be shifted to model
   name: string;
   age: number;
@@ -11,17 +11,17 @@ export interface Patient {
   email: string;
 }
 
-export async function fetchPatient(name: string): Promise<Patient> {
+export async function fetchPerson(name: string): Promise<Person> {
   // const url = 'https://REST END POINT URL' All Rest end point URLS can be configured in a constant file
 
   try {
-    // const Patient = await axios.get<Patient>(url)
+    // const Person = await axios.get<Person>(url)
 
     return {
       name: 'Mahesh Patil',
       age: 32,
       dob: 32,
-      phoneNumber: '9960955960',
+      phoneNumber: '996095****',
       email: 'monstermp@gmail.com'
     };
   } catch (err) {

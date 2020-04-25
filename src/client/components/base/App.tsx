@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPatientsDetails } from '../../features/patient/patientSlice';
+import { fetchPersonsDetails } from '../../features/person/personSlice';
 import { RootState } from '../../reducers';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
 
   const { name, age, phoneNumber, email } = useSelector(
-    (state: RootState) => state.patientDetails
+    (state: RootState) => state.PersonDetails
   );
 
-  // const showPatientDetails = (name: string) => {
-  //   dispatch(fetchPatientsDetails( name ))
+  // const showPersonDetails = (name: string) => {
+  //   dispatch(fetchPersonsDetails( name ))
   // }
 
   useEffect(() => {
     // if (name) {
-    dispatch(fetchPatientsDetails(name));
+    dispatch(fetchPersonsDetails(name));
     // }
   }, [name, dispatch]);
 
@@ -24,8 +24,8 @@ const App: React.FC = () => {
     <div className="App">
       <header className="App-header">
         <p>{/* Edit <code>src/App.tsx</code> and save to reload. */}</p>
-        Welcome {name} to Hello Clinic!! Your email id is {email} and Phone
-        number is {phoneNumber}
+        Welcome {name} to PWA-React-TypeScript App!! Your email id is {email}{' '}
+        and Phone number is {phoneNumber}
       </header>
     </div>
   );

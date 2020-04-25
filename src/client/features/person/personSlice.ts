@@ -1,9 +1,9 @@
 //Slice is a combination of action.js and reducer.js
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../../createStore';
-import { Patient, fetchPatient } from '../../api/fetch';
+import { Person, fetchPerson } from '../../api/fetch';
 
-interface PatientDetailsState {
+interface PersonDetailsState {
   name: string;
   age: number | null;
   phoneNumber: string | null;
@@ -11,7 +11,7 @@ interface PatientDetailsState {
   error: String | null;
 }
 
-const initialState: PatientDetailsState = {
+const initialState: PersonDetailsState = {
   name: '',
   age: null,
   phoneNumber: null,
@@ -19,11 +19,11 @@ const initialState: PatientDetailsState = {
   error: null
 };
 
-const patientDetailsSlice = createSlice({
-  name: 'patientDetails',
+const PersonDetailsSlice = createSlice({
+  name: 'PersonDetails',
   initialState,
   reducers: {
-    getPatientSuccess(state, action: PayloadAction<Patient>) {
+    getPersonSuccess(state, action: PayloadAction<Person>) {
       const { name, age, phoneNumber, email } = action.payload;
       state.name = name;
       state.age = age;
@@ -31,7 +31,7 @@ const patientDetailsSlice = createSlice({
       state.email = email;
       state.error = null;
     },
-    getPatientFailure(state, action: PayloadAction<string>) {
+    getPersonFailure(state, action: PayloadAction<string>) {
       state.name = '';
       state.age = null;
       state.phoneNumber = null;
@@ -42,20 +42,20 @@ const patientDetailsSlice = createSlice({
 
 //Action Types
 export const {
-  getPatientSuccess,
-  getPatientFailure
-} = patientDetailsSlice.actions;
+  getPersonSuccess,
+  getPersonFailure
+} = PersonDetailsSlice.actions;
 
-export default patientDetailsSlice.reducer;
+export default PersonDetailsSlice.reducer;
 
-export const fetchPatientsDetails = (
-  patientName: string
+export const fetchPersonsDetails = (
+  PersonName: string
 ): AppThunk => async dispatch => {
   try {
-    // dispatch(getPatientDetailsStart()) // Can be used to set loading = 'true'
-    const Patient = await fetchPatient(patientName);
-    dispatch(getPatientSuccess(Patient));
+    // dispatch(getPersonDetailsStart()) // Can be used to set loading = 'true'
+    const Person = await fetchPerson(PersonName);
+    dispatch(getPersonSuccess(Person));
   } catch (err) {
-    dispatch(getPatientFailure(err));
+    dispatch(getPersonFailure(err));
   }
 };
