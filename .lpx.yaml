@@ -1,0 +1,64 @@
+customer: infosys
+vertical: admcoe
+
+multistage: true
+services:
+- id: pwareactts
+  type: dockerfile
+  check: true
+  probe:
+      initialdelay: 140
+      period: 5
+  perStageConfiguration: true
+  stageConfig:
+    dev:
+      replicas: 1
+      resources:
+        requests:
+          memory: "100Mi"
+          cpu: "50m"
+        limits:
+          memory: "300Mi"
+          cpu: "300m"
+    pp:
+      replicas: 1
+      resources:
+        requests:
+          memory: "100Mi"
+          cpu: "50m"
+        limits:
+          memory: "300Mi"
+          cpu: "300m"
+    prod:
+      replicas: 3
+      resources:
+        requests:
+          memory: "100Mi"
+          cpu: "100m"
+        limits:
+          memory: "300Mi"
+          cpu: "300m"
+
+# tests:
+#  - stage: dev
+#    type: dockerfile
+#    filename: ./__integration_tests__/testDockerfile-dev
+#  - stage: pp
+#   type: dockerfile
+#   filename: ./__integration_tests__/testDockerfile-pp
+
+# Specifies the files executed for tests on each environment. Need to be executable 'chmod +x'
+#Integration Tests:
+# - stage: dev
+#   test: cd __integration_tests__ && npm run dev_test
+# - stage: pp
+#   test: cd __integration_tests__ && npm run pp_test
+
+# Unit tests:
+#  - stage: dev
+#    test: ./scripts/ui-tests.sh
+#  - stage: pp
+#    test: ./scripts/ui-tests.sh
+       
+watchers: 
+  - monstermp@gmail.com
