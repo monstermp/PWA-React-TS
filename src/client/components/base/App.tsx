@@ -16,6 +16,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // if (name) {
+      console.log(name)
     dispatch(fetchPersonsDetails(name));
     // }
   }, [name, dispatch]);
